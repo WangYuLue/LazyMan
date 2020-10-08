@@ -38,7 +38,7 @@ LazyMan('Hank').sleepFirst(2).eat('dinner').sleep(3).eat('supper')
 
 一般思路可以通过 **任务队列** 来解决 `LazyMan` 问题，结合 **Promise** 或者 **async** 还可以更加优雅的实现。
 
-还可另辟蹊径通过 **RxJS** 操作符来解决 `LazyMan` 问题。
+还可另辟蹊径通过 **RxJS** 以及其丰富的操作符来解决 `LazyMan` 问题。
 
 ### 1、任务队列实现
 
