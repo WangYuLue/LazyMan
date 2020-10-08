@@ -104,6 +104,12 @@ const LazyMan = (name: string) => new _LazyMan(name);
 LazyMan('Hank').sleepFirst(2).eat('dinner').sleep(3).eat('supper');
 ```
 
+运行查看效果：
+
+```bash
+yarn ts-node src/index01.ts
+```
+
 ### 2、任务队列 + `Promise` 实现
 
 使用 `Promise` 来实现很讨巧，可以用 `Promise` 的天然异步来替代 **方法一** 中的 `next` 调用方式
@@ -160,6 +166,13 @@ class _LazyMan {
 const LazyMan = (name: string) => new _LazyMan(name);
 
 LazyMan('Hank').sleepFirst(2).eat('dinner').sleep(3).eat('supper');
+```
+
+
+运行查看效果：
+
+```bash
+yarn ts-node src/index02.ts
 ```
 
 ### 3、任务队列 + `async` 实现
@@ -221,6 +234,12 @@ class _LazyMan {
 const LazyMan = (name: string) => new _LazyMan(name);
 
 LazyMan('Hank').sleepFirst(2).eat('dinner').sleep(3).eat('supper');
+```
+
+运行查看效果：
+
+```bash
+yarn ts-node src/index03.ts
 ```
 
 ### 4、RxJS实现
@@ -287,6 +306,12 @@ class _LazyMan {
 const LazyMan = (name: string) => new _LazyMan(name);
 
 LazyMan('Hank').sleepFirst(2).eat('dinner').sleep(3).eat('supper');
+```
+
+运行查看效果：
+
+```bash
+yarn ts-node src/index04.ts
 ```
 
 ### 相关链接
