@@ -120,7 +120,7 @@ class _LazyMan {
   name: string;
   constructor(name) {
     this.name = name
-    this.queue = [() => this.sayName(name)]
+    this.sayName(name)
     Promise.resolve().then(() => {
       let sequence = Promise.resolve()
       this.queue.forEach(item => {
@@ -130,23 +130,9 @@ class _LazyMan {
   }
 
   sayName(name) {
-    return new Promise((resolve) => {
+    this.queue.push(() => {
       console.log(`Hi! this is ${name}!`)
-      resolve()
     })
-  }
-
-  holdOn(time) {
-    return () => new Promise(resolve => {
-      setTimeout(() => {
-        console.log(`Wake up after ${time} second`)
-        resolve()
-      }, time * 1000)
-    })
-  }
-
-  sleep(time) {
-    this.queue.push(this.holdOn(time))
     return this
   }
 
@@ -157,8 +143,22 @@ class _LazyMan {
     return this
   }
 
+  _holdOn(time) {
+    return () => new Promise(resolve => {
+      setTimeout(() => {
+        console.log(`Wake up after ${time} second`)
+        resolve()
+      }, time * 1000)
+    })
+  }
+
+  sleep(time) {
+    this.queue.push(this._holdOn(time))
+    return this
+  }
+
   sleepFirst(time) {
-    this.queue.unshift(this.holdOn(time))
+    this.queue.unshift(this._holdOn(time))
     return this
   }
 }
@@ -166,8 +166,11 @@ class _LazyMan {
 const LazyMan = (name: string) => new _LazyMan(name);
 
 LazyMan('Hank').sleepFirst(2).eat('dinner').sleep(3).eat('supper');
-```
 
+export { };
+
+// 参考文章：https://github.com/fi3ework/blog/issues/36
+```
 
 运行查看效果：
 
@@ -185,7 +188,7 @@ class _LazyMan {
   name: string;
   constructor(name) {
     this.name = name
-    this.queue = [() => this.sayName(name)]
+    this.sayName(name)
     setTimeout(async () => {
       for (let todo of this.queue) {
         await todo()
@@ -198,23 +201,9 @@ class _LazyMan {
   }
 
   sayName(name) {
-    return new Promise((resolve) => {
+    this.queue.push(() => {
       console.log(`Hi! this is ${name}!`)
-      resolve()
     })
-  }
-
-  holdOn(time) {
-    return () => new Promise(resolve => {
-      setTimeout(() => {
-        console.log(`Wake up after ${time} second`)
-        resolve()
-      }, time * 1000)
-    })
-  }
-
-  sleep(time) {
-    this.queue.push(this.holdOn(time))
     return this
   }
 
@@ -225,8 +214,22 @@ class _LazyMan {
     return this
   }
 
+  _holdOn(time) {
+    return () => new Promise(resolve => {
+      setTimeout(() => {
+        console.log(`Wake up after ${time} second`)
+        resolve()
+      }, time * 1000)
+    })
+  }
+
+  sleep(time) {
+    this.queue.push(this._holdOn(time))
+    return this
+  }
+
   sleepFirst(time) {
-    this.queue.unshift(this.holdOn(time))
+    this.queue.unshift(this._holdOn(time))
     return this
   }
 }
@@ -234,6 +237,10 @@ class _LazyMan {
 const LazyMan = (name: string) => new _LazyMan(name);
 
 LazyMan('Hank').sleepFirst(2).eat('dinner').sleep(3).eat('supper');
+
+export { };
+
+// 参考文章：https://github.com/fi3ework/blog/issues/36
 ```
 
 运行查看效果：

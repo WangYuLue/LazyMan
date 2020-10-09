@@ -3,7 +3,7 @@ class _LazyMan {
   name: string;
   constructor(name) {
     this.name = name
-    this.queue = [() => this.sayName(name)]
+    this.sayName(name)
     setTimeout(async () => {
       for (let todo of this.queue) {
         await todo()
@@ -16,23 +16,9 @@ class _LazyMan {
   }
 
   sayName(name) {
-    return new Promise((resolve) => {
+    this.queue.push(() => {
       console.log(`Hi! this is ${name}!`)
-      resolve()
     })
-  }
-
-  holdOn(time) {
-    return () => new Promise(resolve => {
-      setTimeout(() => {
-        console.log(`Wake up after ${time} second`)
-        resolve()
-      }, time * 1000)
-    })
-  }
-
-  sleep(time) {
-    this.queue.push(this.holdOn(time))
     return this
   }
 
@@ -43,8 +29,22 @@ class _LazyMan {
     return this
   }
 
+  _holdOn(time) {
+    return () => new Promise(resolve => {
+      setTimeout(() => {
+        console.log(`Wake up after ${time} second`)
+        resolve()
+      }, time * 1000)
+    })
+  }
+
+  sleep(time) {
+    this.queue.push(this._holdOn(time))
+    return this
+  }
+
   sleepFirst(time) {
-    this.queue.unshift(this.holdOn(time))
+    this.queue.unshift(this._holdOn(time))
     return this
   }
 }
