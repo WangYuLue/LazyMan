@@ -3,6 +3,12 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
+  "scripts": {
+    "demo01": "ts-node src/index01.ts",
+    "demo02": "ts-node src/index02.ts",
+    "demo03": "ts-node src/index03.ts",
+    "demo04": "ts-node src/index04.ts"
+  },
   "dependencies": {
     "rxjs": "^6.6.3"
   },

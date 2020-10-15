@@ -40,6 +40,8 @@ LazyMan('Hank').sleepFirst(2).eat('dinner').sleep(3).eat('supper')
 
 还可另辟蹊径通过 **RxJS** 以及其丰富的操作符来解决 `LazyMan` 问题。
 
+为了保证阅读效果，建议读者边阅读边动手实操，点击[这里](https://github.com/WangYuLue/LazyMan)可以下载源码。
+
 ### 1、任务队列实现
 
 这种模式类似 **中间件模式**， 核心是 `next` 方法，每当队列中的一个方法执行完都会调用 `next` 来执行队列中的另外一个方法，直到全部执行完成。
@@ -107,7 +109,7 @@ LazyMan('Hank').sleepFirst(2).eat('dinner').sleep(3).eat('supper');
 运行查看效果：
 
 ```bash
-yarn ts-node src/index01.ts
+yarn demo01
 ```
 
 ### 2、任务队列 + `Promise` 实现
@@ -175,7 +177,7 @@ export { };
 运行查看效果：
 
 ```bash
-yarn ts-node src/index02.ts
+yarn demo02
 ```
 
 ### 3、任务队列 + `async` 实现
@@ -246,7 +248,7 @@ export { };
 运行查看效果：
 
 ```bash
-yarn ts-node src/index03.ts
+yarn demo03
 ```
 
 ### 4、RxJS实现
@@ -318,8 +320,10 @@ LazyMan('Hank').sleepFirst(2).eat('dinner').sleep(3).eat('supper');
 运行查看效果：
 
 ```bash
-yarn ts-node src/index04.ts
+yarn demo04
 ```
+
+上面例子的完整代码可以[点这里](https://github.com/WangYuLue/LazyMan)查看，如果觉得写的不错，可以给笔者一个 star，感谢阅读。
 
 ### 相关链接
 
